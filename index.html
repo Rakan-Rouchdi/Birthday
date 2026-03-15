@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Happy Birthday Mama 🌹</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Pixelify+Sans:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!--           PAGE 1 — LOGIN               -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="page-login" class="page active">
+      <div class="petals-bg" id="petals-bg"></div>
+      <div class="login-card">
+        <div class="login-crown">👑</div>
+        <h1 class="login-title">Welcome</h1>
+        <p class="login-subtitle">Enter your credentials</p>
+        <p class="login-joke">Only for the BD woman</p>
+        <div class="login-form">
+          <div class="input-group">
+            <span class="input-icon">🌹</span>
+            <input
+              type="text"
+              id="username"
+              placeholder="Username"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+            />
+          </div>
+          <div class="input-group">
+            <span class="input-icon">🔑</span>
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              autocomplete="off"
+            />
+          </div>
+          <button id="login-btn" class="login-btn">
+            <span>Enter</span>
+            <span class="btn-sparkle">✨</span>
+          </button>
+          <p id="login-error" class="login-error"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!--         PAGE 2 — BIRTHDAY CAKE         -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="page-birthday" class="page">
+      <h1 class="page-title">
+        H<span class="inter">a</span>pp<span class="inter">y Bir</span>th<span class="inter">da</span>y!
+      </h1>
+      <div class="content">
+        <div class="webcam">
+          <video id="webcam" autoplay playsinline></video>
+          <canvas id="canvas"></canvas>
+        </div>
+        <div class="cake-area">
+          <img src="assets/cake_bg.png" alt="" class="cake-bg" />
+          <img src="assets/cake_unlit.gif" alt="" class="cake" />
+          <img src="assets/match.gif" alt="" class="match" />
+        </div>
+        <p class="instructions">
+          🕯️ Move your finger to light the candle, then blow it out!<br />
+          <span class="instructions-joke">(Yes, through the screen. Welcome to the future. 🤷)</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!--        PAGE 3 — HAPPY BIRTHDAY         -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="page-message" class="page">
+      <div class="message-stars" id="message-stars"></div>
+      <div class="message-container">
+        <div class="message-emoji-row">
+          <span class="msg-emoji bounce-1">🎂</span>
+          <span class="msg-emoji bounce-2">🌹</span>
+          <span class="msg-emoji bounce-3">🎉</span>
+        </div>
+        <h1 class="message-title">
+          Happy Birthday,
+        </h1>
+        <h2 class="message-name">Mama! 💕</h2>
+        <p class="message-subtitle">
+          You are the best mom in the world!<br />
+          Enjoy your day. 👑
+        </p>
+        <p class="message-joke">
+          P.S. this is technologia
+        </p>
+        <button id="go-to-gift-btn" class="go-gift-btn">
+          <span>Go to Gift</span>
+          <span class="gift-icon">🎁</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!--           PAGE 4 — GIFT                -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="page-gift" class="page">
+      <div class="gift-sparkles" id="gift-sparkles"></div>
+      <div class="gift-container">
+
+        <!-- Heading -->
+        <div class="gift-top-text">
+          <h2 class="gift-heading">What the helly is inside here?</h2>
+        </div>
+
+        <!-- Step 1: Gift box -->
+        <div id="gift-box-wrapper" class="gift-box-wrapper">
+          <div id="gift-box" class="gift-box">🎁</div>
+          <p class="gift-hint" id="gift-hint">Tap the gift to open it!</p>
+        </div>
+
+        <!-- Roses burst overlay -->
+        <div id="roses-burst" class="roses-burst hidden"></div>
+
+        <!-- Step 2: Envelope (shown after gift opens) -->
+        <div id="envelope-wrapper" class="envelope-wrapper hidden">
+          <div id="envelope" class="envelope">
+            <div class="env-body">
+              <div class="env-flap" id="env-flap"></div>
+              <div class="env-seal" id="env-seal">💌</div>
+              <div class="env-address">
+                <span class="env-to">To: Mama 🌹</span>
+                <span class="env-from">With all my love ❤️</span>
+              </div>
+            </div>
+          </div>
+          <p class="envelope-hint" id="envelope-hint">Tap to open your letter 💌</p>
+        </div>
+
+        <!-- Step 3: Birthday Note (shown after envelope opens) -->
+        <div id="birthday-note" class="birthday-note hidden">
+          <div class="note-inner">
+
+            <!-- Note header -->
+            <div class="note-header">
+              <span class="note-rose">🌹</span>
+              <span class="note-rose">🌹</span>
+              <span class="note-rose">🌹</span>
+            </div>
+
+            <!-- Note message -->
+            <p class="note-text">
+              Happy Birthday Mama,<br />
+              I love you to the moon and back 🌹
+            </p>
+            <p class="note-joke">
+            </p>
+
+            <div class="note-divider"></div>
+
+            <!-- Virtual gifts -->
+            <div class="virtual-gifts-section">
+              <p class="virtual-gifts-title">
+                Take some gifts
+              </p>
+              <div class="virtual-gifts-grid">
+                <div class="virtual-gift-item" data-gift="bear">
+                  <img src="assets/bear.png" alt="Teddy Bear" class="virtual-gift-img" />
+                  <p class="virtual-gift-name">Bear Hug 🧸</p>
+                  <p class="virtual-gift-caption">The bear is standing in for me since I can't be there</p>
+                  <p class="gift-reaction">Tap for a hug! 🧸</p>
+                </div>
+                <div class="virtual-gift-item" data-gift="bouquet">
+                  <img src="assets/bouquet.png" alt="Bouquet" class="virtual-gift-img" />
+                  <p class="virtual-gift-name">Fresh Flowers 💐</p>
+                  <p class="virtual-gift-caption">Here are some roses for you</p>
+                  <p class="gift-reaction">Tap to sniff! 🌸</p>
+                </div>
+                <div class="virtual-gift-item" data-gift="chocolate">
+                  <img src="assets/chocolate.png" alt="Chocolate" class="virtual-gift-img" />
+                  <p class="virtual-gift-name">Chocolate 🍫</p>
+                  <p class="virtual-gift-caption">I ate the real one on the plane. Sorry.</p>
+                  <p class="gift-reaction">Tap to eat! 🍫</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="note-divider"></div>
+
+            <!-- Photo memories carousel -->
+            <div class="memories-section">
+              <p class="memories-title">📸 Photos</p>
+              <div class="carousel-container">
+                <div class="carousel-track" id="carousel-track">
+                  <div class="carousel-slide">
+                    <div class="photo-slot">
+                      <img src="assets/pic1.PNG" alt="Memory 1" />
+                    </div>
+                  </div>
+                  <div class="carousel-slide">
+                    <div class="photo-slot">
+                      <img src="assets/pic2.PNG" alt="Memory 2" />
+                    </div>
+                  </div>
+                  <div class="carousel-slide">
+                    <div class="photo-slot">
+                      <img src="assets/pic3.PNG" alt="Memory 3" />
+                    </div>
+                  </div>
+                  <div class="carousel-slide">
+                    <div class="photo-slot">
+                      <img src="assets/pic4.PNG" alt="Memory 4" />
+                    </div>
+                  </div>
+                </div>
+                <!-- Arrow buttons -->
+                <button class="carousel-btn carousel-prev" id="carousel-prev">&#8249;</button>
+                <button class="carousel-btn carousel-next" id="carousel-next">&#8250;</button>
+                <!-- Dot indicators -->
+                <div class="carousel-dots" id="carousel-dots"></div>
+              </div>
+            </div>
+
+            <!-- Note footer -->
+            <div class="note-footer">
+              <span>💕</span>
+              <span>💕</span>
+              <span>💕</span>
+            </div>
+
+          </div>
+        </div>
+        <!-- end birthday-note -->
+
+      </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

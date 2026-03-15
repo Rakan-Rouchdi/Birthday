@@ -207,17 +207,40 @@ let isBlowDetectionActive = false;
 
 async function initBlowDetection() {
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    analyser     = audioContext.createAnalyser();
-    microphone   = audioContext.createMediaStreamSource(stream);
+    // Create AudioContext synchronously (must happen inside user gesture on iOS)
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    // iOS Safari creates AudioContext in "suspended" state — must resume explicitly
+    if (audioContext.state === "suspended") {
+      await audioContext.resume();
+    }
+
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+    analyser   = audioContext.createAnalyser();
+    microphone = audioContext.createMediaStreamSource(stream);
 
     analyser.fftSize = 256;
     microphone.connect(analyser);
     isBlowDetectionActive = true;
     detectBlow();
+
+    // Hide mic button once enabled
+    const micBtn = document.getElementById("mic-btn");
+    if (micBtn) {
+      micBtn.textContent = "✅ Blowing enabled!";
+      micBtn.style.background = "linear-gradient(135deg, #2d6a4f, #40916c)";
+      micBtn.style.cursor = "default";
+      setTimeout(() => micBtn.classList.add("hidden"), 2000);
+    }
   } catch (err) {
     console.error("Microphone error:", err);
+    const micBtn = document.getElementById("mic-btn");
+    if (micBtn) {
+      micBtn.textContent = "❌ Mic blocked — check permissions";
+      micBtn.style.background = "linear-gradient(135deg, #6b0000, #a50000)";
+    }
   }
 }
 
@@ -280,11 +303,28 @@ function initBirthdayPage() {
   initCamera();
 
   if (isMobile) {
-    document.body.addEventListener(
-      "click",
-      () => { if (!audioContext) initBlowDetection(); },
-      { once: true }
-    );
+    // iOS Safari requires AudioContext to be created synchronously inside a
+    // direct user-gesture handler. Show a dedicated button so the tap is
+    // unambiguously a user gesture — the most reliable iOS pattern.
+    const micBtn = document.getElementById("mic-btn");
+    if (micBtn) {
+      micBtn.classList.remove("hidden");
+
+      const onMicTap = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        // Create AudioContext synchronously right here, inside the gesture
+        if (!audioContext) {
+          audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        initBlowDetection();
+        micBtn.removeEventListener("click",    onMicTap);
+        micBtn.removeEventListener("touchend", onMicTap);
+      };
+
+      micBtn.addEventListener("click",    onMicTap);
+      micBtn.addEventListener("touchend", onMicTap);
+    }
   } else {
     initBlowDetection();
   }

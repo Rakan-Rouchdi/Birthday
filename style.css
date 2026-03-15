@@ -375,6 +375,35 @@ body {
   margin-top: 0.2rem;
 }
 
+/* Mic permission button — shown on iOS to unlock AudioContext */
+.mic-btn {
+  margin-top: 0.9rem;
+  padding: 0.7rem 1.6rem;
+  background: linear-gradient(135deg, var(--red-primary) 0%, var(--red-bright) 100%);
+  border: 1px solid rgba(255, 100, 100, 0.35);
+  border-radius: 50px;
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.4s;
+  box-shadow: 0 4px 18px rgba(200, 0, 40, 0.45);
+  animation: micPulse 2s ease-in-out infinite;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.mic-btn:active {
+  transform: scale(0.96);
+}
+
+@keyframes micPulse {
+  0%, 100% { box-shadow: 0 4px 18px rgba(200, 0, 40, 0.45); }
+  50%       { box-shadow: 0 4px 28px rgba(200, 0, 40, 0.75); }
+}
+
 /* ═══════════════════════════════════════════════════
    PAGE 3 — HAPPY BIRTHDAY MESSAGE
 ═══════════════════════════════════════════════════ */
